@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class SegmentTreeNode {
     private int val = 0;
     private SegmentTreeNode leftChild;
@@ -90,7 +93,16 @@ class SegmentTree {
     }
 
     public void levelOrderTraversal() {
-        // todo
+        List<SegmentTreeNode> queue = new ArrayList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            SegmentTreeNode node = queue.remove(0);
+            System.out.print(node.getVal() + " ");
+            if (node.getLeftChild() != null)
+                queue.add(node.getLeftChild());
+            if (node.getRightChild() != null)
+                queue.add(node.getRightChild());
+        }
     }
 
     public SegmentTreeNode getRoot() {
@@ -116,7 +128,9 @@ public class SegmentTreeDemo {
     public static void main(String[] args) {
         int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8 };
         SegmentTree sgTree = new SegmentTree(arr);
-        // todo- print level order traversal
+        System.out.println("Level Order Traversal of: ");
+        sgTree.levelOrderTraversal();
+
         // implement query method
 
     }
