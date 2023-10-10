@@ -16,8 +16,8 @@ class SegmentTree:
         self.tree = self._build(arr, 0, self.n-1)
 
     def _build(self, arr, left_index, right_index):
-        if left_index > right_index:
-            return
+        # if left_index > right_index:
+        #     return
 
         node = SegmentTreeNode(left_index, right_index)
         if left_index == right_index:
@@ -68,7 +68,7 @@ class SegmentTree:
 
 if __name__ == "__main__":
     # Create an array 'arr' with values [1, 2, 3, 4, 5, 6]
-    arr = [1, 2, 3, 4, 5, 6]
+    arr = [1,2]
 
     # Create a Segment Tree 's_tree' using the 'arr' as input
     s_tree = SegmentTree(arr)
