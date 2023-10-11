@@ -56,12 +56,12 @@ class SegmentTreeNode {
 
 }
 
-class SegmentTree {
+class SumSegmentTree {
 
     private SegmentTreeNode root;
     private int[] arr;
 
-    SegmentTree(int[] arr) {
+    SumSegmentTree(int[] arr) {
         this.arr = arr;
 
         build();
@@ -92,6 +92,51 @@ class SegmentTree {
         return node;
     }
 
+    public int query(int l, int r) {
+
+        if (root == null)
+            return 0;
+        return queryRecursive(root, l, r);
+
+    }
+
+    public void update(int index, int val) {
+        if (root == null)
+            return;
+        updateRecursive(0, this.arr.length - 1, index, val, root);
+
+    }
+
+    public void updateRecursive(int left, int right, int index, int val, SegmentTreeNode node) {
+        if (node == null)
+            return;
+
+        if (node.getLeftIndex() == node.getRightIndex() && node.getLeftIndex() == index) {
+            node.setVal(val);
+            return;
+        }
+
+        if (node.getLeftIndex() <= index && node.getRightIndex() >= index)
+            node.setVal(node.getVal() + val);
+
+        int mid = (left + right) / 2;
+        updateRecursive(left, mid, index, val, node.getLeftChild());
+        updateRecursive(mid + 1, right, index, val, node.getRightChild());
+
+    }
+
+    private int queryRecursive(SegmentTreeNode node, int l, int r) {
+        if (node == null)
+            return 0;
+
+        if (node.getLeftIndex() >= l && node.getRightIndex() <= r)
+            return node.getVal();
+
+        int lsum = queryRecursive(node.getLeftChild(), l, r);
+        int rsum = queryRecursive(node.getRightChild(), l, r);
+        return lsum + rsum;
+    }
+
     public void levelOrderTraversal() {
         List<SegmentTreeNode> queue = new ArrayList<>();
         queue.add(root);
@@ -103,6 +148,7 @@ class SegmentTree {
             if (node.getRightChild() != null)
                 queue.add(node.getRightChild());
         }
+        System.out.println();
     }
 
     public SegmentTreeNode getRoot() {
@@ -123,15 +169,26 @@ class SegmentTree {
 
 }
 
-public class SegmentTreeDemo {
+public class SumSegmentTreeDemo {
 
     public static void main(String[] args) {
         int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8 };
-        SegmentTree sgTree = new SegmentTree(arr);
+        SumSegmentTree sgTree = new SumSegmentTree(arr);
         System.out.println("Level Order Traversal of: ");
         sgTree.levelOrderTraversal();
 
-        // implement query method
+        int sum = sgTree.query(1, 3);
+        System.out.println("Range[1,3] sum: " + sum);
+        int sum2 = sgTree.query(3, 7);
+        System.out.println("Range[3,7] sum: " + sum2);
+
+        System.out.println("Level Order Traversal before update index 6 with 10: ");
+        sgTree.levelOrderTraversal();
+
+        sgTree.update(6, 10);
+
+        System.out.println("Level Order Traversal after update index 6 with 10: ");
+        sgTree.levelOrderTraversal();
 
     }
 

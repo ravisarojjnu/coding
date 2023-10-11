@@ -28,6 +28,26 @@ class SegmentTree:
             node.right_child = self._build(arr, mid+1, right_index)
             node.val = node.left_child.val+node.right_child.val
         return node
+    
+    def update(self,index,val):
+        self._update(0,self.n-1,index,val,self.tree)
+
+    def _update(self,left,right,index,val,node):
+        if left>right:
+            return 
+        if node==None:
+            return
+
+        if node.left_index==node.right_index and node.left_index==index:
+            node.val=val
+            return
+        if node.left_index<=index and node.right_index>=index:
+
+            node.val+=val
+        mid=(left+right)//2
+        self._update(left,mid,index,val,node.left_child)
+        self._update(mid+1,right,index,val,node.right_child)
+            
 
     def query(self, l, r):
         return self._query(l, r, self.tree)
@@ -64,11 +84,12 @@ class SegmentTree:
                 queue.append(node.left_child)
             if node.right_child:
                 queue.append(node.right_child)
+        print()
 
 
 if __name__ == "__main__":
     # Create an array 'arr' with values [1, 2, 3, 4, 5, 6]
-    arr = [1,2]
+    arr = [1,2,3]
 
     # Create a Segment Tree 's_tree' using the 'arr' as input
     s_tree = SegmentTree(arr)
@@ -81,7 +102,7 @@ if __name__ == "__main__":
     # Perform a level order traversal of the Segment Tree
     print("Level Order Traversal of the Segment Tree:")
     s_tree.level_order_traversal()
-    print()
+    
 
     # Print the value stored at the root of the Segment Tree
     print("Value at the root of the Segment Tree:", s_tree.tree.val)
@@ -97,3 +118,18 @@ if __name__ == "__main__":
     # Query the Segment Tree to find the sum of elements in the range [5, 6]
     val = s_tree.query(5, 6)
     print("Query [5, 6] Result:", val)
+
+    # update the array at index 5 with value 10
+    print("before updating the arr at index 5 with value 10 Tree: ")
+    s_tree.level_order_traversal()
+    s_tree.update(5, 10)
+    print("after updating the arr at index 5 with value 10 Tree: ")
+    s_tree.level_order_traversal()
+
+    # update the array at index 2 with value 10
+    print("before updating the arr at index 2 with value 10 Tree: ")
+    s_tree.level_order_traversal()
+    s_tree.update(2, 10)
+    print("after updating the arr at index 2 with value 10 Tree: ")
+    s_tree.level_order_traversal()
+   
