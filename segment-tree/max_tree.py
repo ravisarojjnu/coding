@@ -1,4 +1,5 @@
 
+import math
 class TreeNode:
 
     def __init__(self,left_index,right_index):
@@ -25,6 +26,20 @@ class MaxSegmentTree:
         node.val=max(node.left_child.val,node.right_child.val)
         return node
     
+    def query(self,l,r):
+        return self._query(l,r,self.root)
+    
+    def _query(self,l,r,node):
+        if node==None:
+            return - math.inf
+        
+        if node.left_index>=l and node.right_index<=r:
+            return node.val
+        lmax=self._query(l,r,node.left_child)
+        rmax=self._query(l,r,node.right_child)
+        return max(lmax,rmax)
+
+    
     def level_order_traversal(self):
         queue=list()
         queue.append(self.root)
@@ -44,6 +59,11 @@ if __name__=="__main__":
     m_tree=MaxSegmentTree(arr)
     print("level order traversal of max segment tree of the arr: ",arr)
     m_tree.level_order_traversal()
+
+    print("query max of element between the index 2,5 : ",arr, end=" - ")
+    max_val=m_tree.query(2,5)
+    print(max_val)
+
 
 
        
