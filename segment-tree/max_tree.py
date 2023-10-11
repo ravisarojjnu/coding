@@ -39,7 +39,23 @@ class MaxSegmentTree:
         rmax=self._query(l,r,node.right_child)
         return max(lmax,rmax)
 
-    
+    def update(self,index,val):
+        self.arr[index]=val
+        self._update(index,val,self.root)
+
+    def _update(self,index,val,node):
+        if node==None:
+            return
+        if node.left_index==node.right_index and node.left_index==index:
+            node.val=val
+            return
+
+        if node.left_index<=index and node.right_index>=index:
+            node.val=max(node.val,val)
+        
+        self._update(index,val,node.left_child)
+        self._update(index,val,node.right_child)
+
     def level_order_traversal(self):
         queue=list()
         queue.append(self.root)
@@ -63,6 +79,12 @@ if __name__=="__main__":
     print("query max of element between the index 2,5 : ",arr, end=" - ")
     max_val=m_tree.query(2,5)
     print(max_val)
+
+    print("level order traversal of max segment tree of the arr before update at index 3 ,11: ",arr)
+    m_tree.level_order_traversal()
+    m_tree.update(3,11)
+    print("level order traversal of max segment tree of the arr after update at index 3 ,11: ",arr)
+    m_tree.level_order_traversal()
 
 
 
