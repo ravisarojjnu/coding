@@ -107,7 +107,7 @@ class SumSegmentTree {
 
     }
 
-    public void updateRecursive(int left, int right, int index, int val, SegmentTreeNode node) {
+    private void updateRecursive(int left, int right, int index, int val, SegmentTreeNode node) {
         if (node == null)
             return;
 
