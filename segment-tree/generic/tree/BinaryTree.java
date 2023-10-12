@@ -98,7 +98,28 @@ public class BinaryTree<T> {
     }
 
     public int height() {
-        return 0;
+        if (root == null)
+            return 0;
+        List<TreeNode<T>> queue = new ArrayList<>();
+        queue.add(root);
+        queue.add(null);
+        int count = 0;
+        while (!queue.isEmpty()) {
+            TreeNode<T> node = queue.remove(0);
+            if (node == null) {
+                count += 1;
+                if (queue.isEmpty())
+                    break;
+                queue.add(null);
+            } else {
+                if (node.getLeftChild() != null)
+                    queue.add(node.getLeftChild());
+                if (node.getRightChild() != null)
+                    queue.add(node.getRightChild());
+            }
+        }
+        return count;
+
     }
 
     public TreeNode<T> getRoot() {

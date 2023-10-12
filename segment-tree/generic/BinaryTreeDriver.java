@@ -39,6 +39,9 @@ public class BinaryTreeDriver {
         for (int x : postorderTraversal) {
             System.out.print(x + " ");
         }
+
+        System.out.println();
+        System.out.print("height of the Tree: " + btree.height());
     }
 
 }
