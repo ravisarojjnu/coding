@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.tree.TreeCellRenderer;
+
 class TreeNode {
     int val;
     TreeNode leftChild;
@@ -63,6 +65,28 @@ class MaxSegmentTree {
 
     }
 
+    void update(int index, int val) {
+        this.arr[index] = val;
+        updateRecursive(index, val, root);
+
+    }
+
+    private void updateRecursive(int index, int val, TreeNode node) {
+        if (node == null)
+            return;
+
+        if (node.leftIndex == node.rightIndex && node.leftIndex == index) {
+            node.val = val;
+            return;
+        }
+
+        if (node.leftIndex <= index && node.rightIndex >= index)
+            node.val = max(node.val, val);
+
+        updateRecursive(index, val, node.leftChild);
+        updateRecursive(index, val, node.rightChild);
+    }
+
     private int max(int val1, int val2) {
         if (val1 > val2)
             return val1;
@@ -101,6 +125,12 @@ public class MaxSegmentTreeDemo {
         System.out.print("query the array for max value between 0,2: ");
         int val2 = tree.query(0, 2);
         System.out.println(val2);
+
+        System.out.println("Level order traversal before update of the tree at 3 with 10: ");
+        tree.levelOrderTraversal();
+        tree.update(3, 10);
+        System.out.println("Level order traversal after update of the tree at 3 with 10: ");
+        tree.levelOrderTraversal();
 
     }
 
