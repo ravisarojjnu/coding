@@ -1,4 +1,4 @@
-# Daily DSA and Algorithms Coding Practice
+# Daily DSA, Algorithms and System design Coding Practice
 
 Welcome to my coding repository where I document my daily practice of Data Structures and Algorithms (DSA). In this repository, you will find solutions to various DSA problems, as well as explanations and analysis of the code.
 
