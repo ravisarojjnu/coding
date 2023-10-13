@@ -20,3 +20,8 @@ The main idea behind prefix-array based algorithms is to precompute and store th
 ## Algorithm
 ### prefix-sum array
 - In this approach, you create an additional array where each element stores the sum of all elements in the original array up to the current index. this allows for efficient prifix sum queries.
+
+
+## Complexity
+A precomputed prefix sum array, range sum queries are efficient and take constant time (O(1)) for each query. 
+The O(n) cost is associated with the preprocessing step, which is typically a one-time cost.

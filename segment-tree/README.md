@@ -64,3 +64,20 @@ Segment trees have a wide range of applications, including:
 
 Segment trees are a powerful tool for solving a wide range of problems involving range queries and updates. They have applications in competitive programming, database systems, and more. Understanding how to build and use segment trees can be a valuable skill for algorithmic problem-solving.
 
+## Complexity
+### Building the Segment Tree:
+
+Building a segment tree from an array of size "n" typically takes O(n) time. The construction process involves recursively dividing the array into segments and computing the aggregate values (e.g., sum, minimum, maximum) for each segment.
+
+### Range Query (e.g., Sum Query):
+
+Querying for the sum of elements in a specific range [L, R] in the array using a segment tree takes O(log n) time, where "n" is the size of the array. This is because you descend the tree by visiting a logarithmic number of nodes (specifically, O(log n) nodes) to compute the result.
+
+### Update Operation (e.g., Updating an Element):
+
+Updating a single element in the array and subsequently updating the segment tree to maintain consistency also takes O(log n) time. This is because you need to traverse the tree from the leaf node corresponding to the element you're updating up to the root, updating the aggregate values along the way.
+
+### Range Update Operation (e.g., Range Add):
+
+Range update operations (updating all elements in a specified range) can be supported efficiently in segment trees as well. Updating a range takes O(log n) time, where "n" is the size of the array, because you descend the tree in a manner similar to range queries.
+
