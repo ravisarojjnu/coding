@@ -21,6 +21,19 @@ public class SumSegmentTreeDriver {
         Integer val = tree.query(2, 5);
         System.out.println(val);
 
+        System.out.print("Level order traversal before update at 3, 10: ");
+        levelOrderTraversal = tree.levelOrderTraversal();
+        for (int x : levelOrderTraversal) {
+            System.out.print(x + " ");
+        }
+        System.out.println();
+        tree.update(3, 10);
+        System.out.print("Level order traversal after update at 3, 10: ");
+        levelOrderTraversal = tree.levelOrderTraversal();
+        for (int x : levelOrderTraversal) {
+            System.out.print(x + " ");
+        }
+
     }
 
 }

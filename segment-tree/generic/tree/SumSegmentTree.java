@@ -60,7 +60,28 @@ public class SumSegmentTree<T> extends SegmentTree<T> {
 
     @Override
     public void update(int index, T val) {
-        return;
+        arr[index] = val;
+        updateRecursive(index, val, super.getRoot());
+
+    }
+
+    public void updateRecursive(int index, T val, TreeNode<T> node) {
+
+        if (node == null)
+            return;
+
+        if (node.getLeftIndex() == index && node.getRightIndex() == index) {
+            node.setVal(val);
+            return;
+        }
+
+        if (node.getLeftIndex() <= index && node.getRightIndex() >= index) {
+            node.setVal(addFunction.apply(node.getVal(), val));
+        }
+
+        updateRecursive(index, val, node.getLeftChild());
+        updateRecursive(index, val, node.getRightChild());
+
     }
 
 }
