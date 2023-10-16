@@ -13,11 +13,12 @@ class SegmentTreeNode:
 class SegmentTree:
     def __init__(self, arr):
         self.n = len(arr)
+        self.arr=arr
         self.tree = self._build(arr, 0, self.n-1)
 
     def _build(self, arr, left_index, right_index):
-        # if left_index > right_index:
-        #     return
+        if left_index > right_index:
+            return
 
         node = SegmentTreeNode(left_index, right_index)
         if left_index == right_index:
@@ -30,16 +31,17 @@ class SegmentTree:
         return node
     
     def update(self,index,val):
-        self._update(0,self.n-1,index,val,self.tree)
+        diff=val-self.arr[index]
+        self._update(0,self.n-1,index,diff,self.tree)
 
     def _update(self,left,right,index,val,node):
-        if left>right:
+        if left>right :
             return 
         if node==None:
             return
 
         if node.left_index==node.right_index and node.left_index==index:
-            node.val=val
+            node.val+=val
             return
         if node.left_index<=index and node.right_index>=index:
 

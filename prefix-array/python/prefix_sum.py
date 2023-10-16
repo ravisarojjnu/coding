@@ -22,8 +22,8 @@ class PrefixSumArray():
 
 
 if __name__=="__main__":
-    arr=[1,2,3,4,5,6]
+    arr=[7,2,7,2,0]
     prarr=PrefixSumArray(arr)
-    val=prarr.query(3,5)
-    print(val)
+    # val=prarr.query(3,5)
+    
         
