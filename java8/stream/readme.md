@@ -5,6 +5,7 @@ This repository contains examples and explanations of using the Stream API in Ja
 ## Overview
 
 The Stream API provides a set of high-level operations that allow you to express complex data manipulations easily. Here are some of the key features covered in this repository:
+![image](JavaStream.png )
 
 - **Filtering:** Using filter() to select elements based on a given predicate.
 - **Mapping:** Applying a function to each element using map().
