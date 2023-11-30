@@ -60,6 +60,7 @@ class MyRunnable implements Runnable {
 ## Thread Lifecycle
 
 Threads in Java go through various states: New, Runnable, Blocked, Waiting, Timed Waiting, and Terminated. Understanding the lifecycle is crucial for effective thread management.
+![image](lifecycleofthread.jpg )
 
 ## Thread Synchronization
 
